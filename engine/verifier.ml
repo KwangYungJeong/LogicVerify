@@ -8,11 +8,11 @@ let verify : Args.t -> Syntax.pgm -> bool
   print_endline ("Input File: " ^ args.inputFile);
   
   print_endline "\n[Methods to Verify]";
-  List.iter (fun (mthd : Syntax.mthd) ->
+  List.iter (fun (mthd: Syntax.mthd) ->
     print_endline ("  - " ^ mthd.id)
-  ) pgm.Syntax.mthds;
+  ) pgm.mthds;
 
 
-  print_endline "\n===============================";
+  print_endline "===============================";
   true
 
