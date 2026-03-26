@@ -1,0 +1,15 @@
+(library 
+ (name engine)
+ (public_name pronto.engine)
+ (libraries 
+    pronto.utils
+    pronto.program 
+    unix
+    core 
+    batteries
+    z3
+    yojson
+    logs
+    mtime
+    mtime.clock.os
+ ))

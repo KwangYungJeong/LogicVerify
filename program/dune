@@ -1,0 +1,19 @@
+(library 
+ (name program)
+ (public_name pronto.program)
+ (libraries 
+    pronto.utils
+    unix
+    core 
+    batteries
+    z3
+    yojson
+    logs
+    mtime
+    mtime.clock.os
+ ))
+
+ (menhir
+  (modules parser))
+    
+(ocamllex lexer)

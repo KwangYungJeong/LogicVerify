@@ -1,0 +1,18 @@
+(executable
+  (name main)
+  (public_name pronto)
+  (libraries
+    pronto.utils
+    pronto.program 
+    pronto.engine  
+    unix
+    core 
+    batteries
+    z3
+    yojson
+    logs
+    mtime
+    mtime.clock.os
+  )
+  
+(package pronto))
