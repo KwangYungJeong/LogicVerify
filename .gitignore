@@ -1,0 +1,34 @@
+# OCaml/Dune
+_build/
+*.install
+*.omake
+*.run
+*.annot
+*.cmo
+*.cmi
+*.cmx
+*.o
+*.a
+*.cmxa
+*.cmxs
+*.lib
+*.obj
+*.dll
+*.so
+.merlin
+
+# OPAM
+*.opam.locked
+
+# Standard IDEs
+.vscode/
+.idea/
+*.swp
+*~
+.DS_Store
+
+# Project specific
+main.exe
+pronto.engine
+pronto.program
+pronto.utils
