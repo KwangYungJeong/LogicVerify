@@ -38,11 +38,28 @@ let verify : Args.t -> Syntax.pgm -> bool
     (* Generate Basic Paths *)
     let bps = Graph.get_basic_paths cfg in
 
+    (* 
+      BasicPath.t structure for reference:
+      type t = { 
+        pre : Syntax.inv;           (* Pre-condition (Condition) *)
+        nodes : Node.t list;        (* Statements (Sentence) *)
+        post : Syntax.inv;          (* Post-condition (Condition) *)
+      }
+      note: I removed rank_pre and rank_post elements, which is used for completness check that is out of class scope.
+    *)
+
     (* Print Basic Paths *)
     print_endline ("    * # of basic paths: " ^ string_of_int (BatSet.cardinal bps));
-    BatSet.iter (fun bp ->
+    BatSet.iter (fun (bp: Graph.BasicPath.t) ->
       print_endline ("--BP start------------------------------------------------");
-      print_endline (Graph.BasicPath.to_string bp);
+      print_endline "      * bp.pre:";
+      print_endline ("        " ^ Pp.string_of_inv bp.pre);
+      print_endline "      * bp.nodes:";
+      List.iter (fun (node: Graph.Node.t) -> 
+        print_endline ("        " ^ Graph.Node.to_string node)
+      ) bp.nodes;
+      print_endline "      * bp.post:";
+      print_endline ("        " ^ Pp.string_of_inv bp.post);
     ) bps;
     print_endline ("---BP End------------------------------------------------");
   ) pgm.mthds;

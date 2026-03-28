@@ -137,12 +137,37 @@ I tried to print the basic paths of each method. But it was too much to print. S
     (* Print Basic Paths *)
     print_endline ("    * # of basic paths: " ^ string_of_int (BatSet.cardinal bps));
     BatSet.iter (fun bp ->
-      print_endline ("--BP start------------------------------------------------");
+        print_endline ("--BP start------------------------------------------------");
       print_endline (Graph.BasicPath.to_string bp);
-    ) bps;
-    print_endline ("---BP End------------------------------------------------");
-  ) pgm.mthds;
+      ) bps;
+      print_endline ("---BP End------------------------------------------------");
+    ) pgm.mthds;
 ```
 
 This is the screen when I run the verifier with the input file "benchmarks/BinarySearch.dfy".
 ![Screenshot of basic path printing](images/screenshot_basicpath.png)
+
+## Basic Print Details
+
+Next, I implemented a more detailed reporting mechanism to distinguish (Pre/Post) and executable statements.
+
+```ocaml
+    (* Print Basic Paths *)
+    print_endline ("    * # of basic paths: " ^ string_of_int (BatSet.cardinal bps));
+    BatSet.iter (fun (bp: Graph.BasicPath.t) ->
+      print_endline ("--BP start------------------------------------------------");
+      print_endline "      * bp.pre:";
+      print_endline ("        " ^ Pp.string_of_inv bp.pre);
+      print_endline "      * bp.nodes:";
+      List.iter (fun (node: Graph.Node.t) -> 
+        print_endline ("        " ^ Graph.Node.to_string node)
+      ) bp.nodes;
+      print_endline "      * bp.post:";
+      print_endline ("        " ^ Pp.string_of_inv bp.post);
+    ) bps;
+    print_endline ("---BP End------------------------------------------------");
+```
+
+This provides a detailed view of the logical conditions and the executable statements for each path.
+![Screenshot of basic path details](images/screenshot_basicpath_details.png)
+
