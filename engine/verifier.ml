@@ -32,8 +32,19 @@ let verify : Args.t -> Syntax.pgm -> bool
       verified  = false
     } in
     temp_mv_list := new_mv_item::!temp_mv_list;
-    (* TDOO: Implement the verification logic here *)
 
+    (* Generate CFG *)
+    let cfg = Graph.mthd2cfg pgm mthd in
+    (* Generate Basic Paths *)
+    let bps = Graph.get_basic_paths cfg in
+
+    (* Print Basic Paths *)
+    print_endline ("    * # of basic paths: " ^ string_of_int (BatSet.cardinal bps));
+    BatSet.iter (fun bp ->
+      print_endline ("--BP start------------------------------------------------");
+      print_endline (Graph.BasicPath.to_string bp);
+    ) bps;
+    print_endline ("---BP End------------------------------------------------");
   ) pgm.mthds;
   print_endline "===============================";
 

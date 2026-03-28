@@ -121,3 +121,28 @@ Input File: benchmarks/all.dfy
 This is the screen when I run the verifier with the input file "benchmarks/BinarySearch.dfy".
 ![Screenshot of basic check](images/screenshot_basic.png)
 
+## Basic Path Printing
+
+I tried to print the basic paths of each method. But it was too much to print. So I decided to print only the number of basic paths.
+
+```ocaml
+  List.iter (fun (mthd: Syntax.mthd) ->
+    print_endline ("  - " ^ mthd.id);
+
+    (* Generate CFG *)
+    let cfg = Graph.mthd2cfg pgm mthd in
+    (* Generate Basic Paths *)
+    let bps = Graph.get_basic_paths cfg in
+
+    (* Print Basic Paths *)
+    print_endline ("    * # of basic paths: " ^ string_of_int (BatSet.cardinal bps));
+    BatSet.iter (fun bp ->
+      print_endline ("--BP start------------------------------------------------");
+      print_endline (Graph.BasicPath.to_string bp);
+    ) bps;
+    print_endline ("---BP End------------------------------------------------");
+  ) pgm.mthds;
+```
+
+This is the screen when I run the verifier with the input file "benchmarks/BinarySearch.dfy".
+![Screenshot of basic path printing](images/screenshot_basicpath.png)
