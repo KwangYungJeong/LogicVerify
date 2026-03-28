@@ -11,9 +11,11 @@ type method_verify_status = {
 (* Implement a partial correctness verifier *)
 let verify : Args.t -> Syntax.pgm -> bool 
 =fun args pgm -> 
-  
+
+  print_endline "\n[Verifier has started]";
   print_endline ("Input File: " ^ args.inputFile);
-  
+  print_endline "===============================";
+    
   print_endline "\n[Methods to Verify]";
   List.iter (fun (mthd: Syntax.mthd) ->
     print_endline ("  - " ^ mthd.id)
@@ -29,7 +31,9 @@ let verify : Args.t -> Syntax.pgm -> bool
       checked   = false;
       verified  = false
     } in
-    temp_mv_list := new_mv_item::!temp_mv_list
+    temp_mv_list := new_mv_item::!temp_mv_list;
+    (* TDOO: Implement the verification logic here *)
+
   ) pgm.mthds;
   print_endline "===============================";
 

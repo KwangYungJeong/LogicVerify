@@ -72,3 +72,52 @@ dune exec -- ./main.exe --input benchmarks/all.dfy
 ~~~
 
 ## Basic Check
+Things I did.
+- Understand the arguments of verifier.ml
+- Print the arguments of verifier.ml
+- Print the methods of verifier.ml
+- Making the verifier loop for next step
+- Print the statistics of verifier.ml
+
+```
+[Verifier has started]
+Input File: benchmarks/all.dfy
+===============================
+
+[Methods to Verify]
+  - BinarySearchWhile_Incorrect
+  - BinarySearchWhile_Correct
+  - BubbleSort_Incorrect
+  - BubbleSort_Correct
+  - FindMax_Incorrect
+   ...
+[Verifying Methods]
+  - BinarySearchWhile_Incorrect
+  - BinarySearchWhile_Correct
+  - BubbleSort_Incorrect
+  - BubbleSort_Correct
+  - FindMax_Incorrect
+  - FindMax_Correct
+  - CanyonSearch_Incorrect
+  - CanyonSearch_Correct
+   ...
+
+[Verify Summary]
+  - BinarySearchWhile_Incorrect              -> checked: false
+  - BinarySearchWhile_Correct                -> checked: false
+  - BubbleSort_Incorrect                     -> checked: false
+  - BubbleSort_Correct                       -> checked: false
+  - FindMax_Incorrect                        -> checked: false
+  - FindMax_Correct                          -> checked: false
+  ...
+
+[Verify Statistics]
+  - 0 / 39 (checked/total)
+  - 0 / 0 (verified/checked)
+===============================
+
+```
+
+This is the screen when I run the verifier with the input file "benchmarks/BinarySearch.dfy".
+![Screenshot of basic check](images/screenshot_basic.png)
+
