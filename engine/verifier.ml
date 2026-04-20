@@ -317,10 +317,9 @@ let wp_node (mthd: Syntax.mthd) (node: Graph.Node.t) (post: fmla) : fmla =
       let post' = subst_array_id_fmla arr_id new_arr_id post in
       let k_id = "k_wp" ^ string_of_int !wp_arr_counter in
       let k_exp = E_lv (V_var k_id) in
-      let bounds = E_and (E_cmp (Le, E_int 0, k_exp), E_cmp (Lt, k_exp, E_len arr_id)) in
       let ite_val = E_if (E_cmp (Eq, k_exp, idx_exp), e, E_lv (V_arr (arr_id, k_exp))) in
       let eq_cond = E_cmp (Eq, E_lv (V_arr (new_arr_id, k_exp)), ite_val) in
-      let arr_constraint = F_forall (k_id, Some T_int, F_imply (F_exp bounds, F_exp eq_cond)) in
+      let arr_constraint = F_forall (k_id, Some T_int, F_exp eq_cond) in
       let len_constraint = F_exp (E_cmp (Eq, E_len new_arr_id, E_len arr_id)) in
       let imply_fmla = F_imply (F_and [arr_constraint; len_constraint], post') in
       F_forall (new_arr_id, Some (T_arr T_int), imply_fmla)
